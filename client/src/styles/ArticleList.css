@@ -9,25 +9,26 @@
   padding: 18px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--bg-surface);
   box-shadow: var(--shadow);
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .article-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
-  border-color: #bfdbfe;
+  box-shadow: 0 18px 40px rgba(34, 211, 238, 0.15);
+  border-color: var(--accent-cyan);
 }
 
 .article-card h3 {
   margin: 6px 0 4px;
   font-size: 1.2rem;
+  color: var(--text-primary);
 }
 
 .article-card p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-muted);
   line-height: 1.5;
 }
 
@@ -37,7 +38,7 @@
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 10px;
-  color: var(--muted);
+  color: var(--text-muted);
   font-weight: 600;
   font-size: 0.95rem;
 }

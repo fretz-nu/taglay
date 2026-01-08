@@ -5,18 +5,18 @@ function NotFoundPage() {
   return (
     <div className="page">
       <div className="not-found card">
-        <p className="eyebrow">Error</p>
+        <p className="eyebrow">404 Error</p>
         <h1>Page not found.</h1>
         <p className="lead">
-          The link you followed to get here must be broken. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit.
+          The intel you're looking for doesn't exist or has been moved.
+          Please check the URL or navigate back to explore our research.
         </p>
         <div className="hero-actions">
           <Link to="/" className="button-link primary">
             Go home
           </Link>
           <Link to="/articles" className="button-link secondary">
-            Visit articles
+            Browse Intel
           </Link>
         </div>
       </div>

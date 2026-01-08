@@ -12,32 +12,30 @@ function Footer() {
                 <div className="footer-section">
                     <h4>About</h4>
                     <p>
-                        Curating concise React know-how and tasteful UI ideas for builders who want
-                        to ship fast without looking generic.
+                        Building an Innovative Approach against Phishing Attacks through
+                        Machine Learning and Natural Language Processing Techniques.
                     </p>
                 </div>
                 <div className="footer-section">
                     <h4>Contact</h4>
-                    <p>Email: cyrusrobles@company.com</p>
-                    <p>Phone: 09**-***-****</p>
+                    <p>Email: caguiclacd@students.national-u.edu.ph</p>
+                    <p>Phone: 09954188503</p>
                 </div>
                 <div className="footer-section">
                     <h4>Follow Us</h4>
                     <div className="social-links">
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://ph.linkedin.com/in/christian-d-caguicla-478462301" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faLinkedin} />
                         </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faTwitter} />
-                        </a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                        
+                        <a href="https://www.facebook.com/1Caguicla.christian/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faFacebook} />
                         </a>
                     </div>
                 </div>
             </div>
             <div className="footer-bottom">
-                    <p>&copy; {currentYear} Your Company Name. All rights reserved.</p>
+                    <p>&copy; {currentYear} Christian Caguicla. All rights reserved.</p>
             </div>
         </footer>
     );

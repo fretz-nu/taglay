@@ -137,7 +137,7 @@ const getPageTitle = (pathname) => {
     // case "/dashboard":
     //   return "Dashboard";
     case "/dashboard/dash-articles":
-      return "Articles";
+      return "Intel";
     case "/dashboard/users":
       return "Users";
     // case "/dashboard/reports":
@@ -235,7 +235,7 @@ const DashLayout = () => {
                 <ListItemIcon>
                   <ArticleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Articles" />
+                <ListItemText primary="Intel" />
               </ListItemButton>
             </ListItem>
             {/* <>

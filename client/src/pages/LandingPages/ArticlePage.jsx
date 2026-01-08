@@ -65,19 +65,32 @@ function ArticlePage() {
   const words = contentArray.join(' ').split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(2, Math.ceil(words / 70));
 
+  const severityColors = {
+    Critical: '#ef4444',
+    High: '#f59e0b',
+    Info: '#22d3ee',
+  };
+
+  const severityClass = article.severity?.toLowerCase() || 'info';
+
   return (
     <div className="page article-page">
       <div className="page-header">
-        <p className="eyebrow">Article</p>
+        <p className="eyebrow">Intel</p>
         <h1>{article.title}</h1>
         <div className="article-meta">
-          <span className="pill">React</span>
+          <span
+            className={`pill ${severityClass}`}
+            style={{
+              background: `${severityColors[article.severity] || '#22d3ee'}20`,
+              color: severityColors[article.severity] || '#22d3ee',
+              borderColor: `${severityColors[article.severity] || '#22d3ee'}40`
+            }}
+          >
+            {article.severity || 'Info'}
+          </span>
           <span className="muted">{minutes} min read</span>
         </div>
-        <p className="lead">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus egestas blandit
-          fringilla platea quam vel.
-        </p>
       </div>
 
       <div className="article-body">
@@ -85,13 +98,13 @@ function ArticlePage() {
           <p key={`${article.name}-${idx}`}>{paragraph}</p>
         ))}
         <div className="card callout">
-          <h3>Want another angle?</h3>
+          <h3>Explore more findings</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit amet nisl eu condimentum
-            tincidunt pulvinar sed commodo.
+            Dive deeper into our comparative analysis of FastForest, RandomForest, and XGBoost
+            models for phishing URL detection.
           </p>
           <Link to="/articles" className="button-link primary">
-            Browse more articles
+            Browse more Intel
           </Link>
         </div>
       </div>

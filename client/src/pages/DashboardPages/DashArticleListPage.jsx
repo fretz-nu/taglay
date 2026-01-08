@@ -9,6 +9,10 @@ import {
   Box,
   TextField,
   Switch,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -34,6 +38,7 @@ function DashArticleListPage() {
     name: '',
     title: '',
     content: [],
+    severity: 'Info',
     isActive: true,
   });
 
@@ -59,6 +64,7 @@ function DashArticleListPage() {
       name: '',
       title: '',
       content: [],
+      severity: 'Info',
       isActive: true,
     });
     setOpen(true);
@@ -107,9 +113,35 @@ function DashArticleListPage() {
     { field: 'name', headerName: 'Name', flex: 1 },
     { field: 'title', headerName: 'Title', flex: 1 },
     {
+      field: 'severity',
+      headerName: 'Severity',
+      flex: 0.75,
+      renderCell: (params) => {
+        const severityColors = {
+          Critical: '#ef4444',
+          High: '#f59e0b',
+          Info: '#22d3ee',
+        };
+        return (
+          <span
+            style={{
+              padding: '4px 10px',
+              borderRadius: '12px',
+              backgroundColor: `${severityColors[params.row.severity]}20`,
+              color: severityColors[params.row.severity],
+              fontWeight: 600,
+              fontSize: '0.85rem',
+            }}
+          >
+            {params.row.severity}
+          </span>
+        );
+      },
+    },
+    {
       field: 'isActive',
       headerName: 'Active',
-      flex: 1,
+      flex: 0.75,
       renderCell: (params) => (
         <Switch
           checked={params.row.isActive}
@@ -134,14 +166,14 @@ function DashArticleListPage() {
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
-        <Typography variant="h2" fontWeight='bold'>Articles</Typography>
+        <Typography variant="h2" fontWeight='bold'>Intel</Typography>
         <Button
           variant="contained"
           color="primary"
           startIcon={<AddCircleIcon />}
           onClick={handleOpen}
         >
-          Add Article
+          Add Intel
         </Button>
       </Stack>
 
@@ -157,7 +189,7 @@ function DashArticleListPage() {
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalStyle}>
-          <Typography variant="h6">{isEditing ? 'Edit Article' : 'Add Article'}</Typography>
+          <Typography variant="h6">{isEditing ? 'Edit Intel' : 'Add Intel'}</Typography>
           <Stack spacing={2} sx={{ mt: 2 }}>
             <TextField
               label="Name"
@@ -169,6 +201,18 @@ function DashArticleListPage() {
               value={newArticle.title}
               onChange={(e) => setNewArticle({ ...newArticle, title: e.target.value })}
             />
+            <FormControl fullWidth>
+              <InputLabel>Severity</InputLabel>
+              <Select
+                label="Severity"
+                value={newArticle.severity || 'Info'}
+                onChange={(e) => setNewArticle({ ...newArticle, severity: e.target.value })}
+              >
+                <MenuItem value="Critical">Critical</MenuItem>
+                <MenuItem value="High">High</MenuItem>
+                <MenuItem value="Info">Info</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               label="Content"
               multiline

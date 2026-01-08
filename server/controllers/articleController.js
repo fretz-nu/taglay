@@ -11,7 +11,14 @@ const getArticles = async (req, res) => {
 
 const createArticle = async (req, res) => {
   try {
-    const article = await Article.create(req.body);
+    const { name, title, content, severity, isActive } = req.body;
+    const article = await Article.create({
+      name,
+      title,
+      content,
+      severity: severity || 'Info',
+      isActive: isActive !== undefined ? isActive : true
+    });
     res.status(201).json(article);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -20,7 +27,18 @@ const createArticle = async (req, res) => {
 
 const updateArticle = async (req, res) => {
   try {
-    const article = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const { name, title, content, severity, isActive } = req.body;
+    const article = await Article.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        title,
+        content,
+        severity: severity || 'Info',
+        isActive
+      },
+      { new: true, runValidators: true }
+    );
     res.json(article);
   } catch (error) {
     res.status(400).json({ message: error.message });

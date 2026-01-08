@@ -9,32 +9,32 @@ function HomePage() {
     <div className="page">
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">Frontend studio</p>
-          <h1>Polished UI patterns without the corporate beige.</h1>
+          <p className="eyebrow">Cybersecurity Research Hub</p>
+          <h1>Innovative Minds</h1>
           <p className="lead">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec euismod posuere a aliquam
-            mattis ac sed nibh tincidunt non ultrices.
+            Exploring the frontiers of phishing URL detection through comparative algorithmic research.
+            Our thesis compares FastForest, RandomForest, and XGBoost on the PhiUSIIL dataset.
           </p>
           <div className="hero-actions">
             <Link to="/articles" className="button-link primary">
-              Browse articles
+              Browse Intel
             </Link>
             <Link to="/about" className="button-link secondary">
-              About the team
+              About the Research
             </Link>
           </div>
           <div className="stats">
             <div className="stat">
-              <strong>{articles.length}+</strong>
-              <span>React breakdowns</span>
+              <strong>93%</strong>
+              <span>XGBoost accuracy</span>
+            </div>
+            <div className="stat">
+              <strong>91%</strong>
+              <span>RandomForest baseline</span>
             </div>
             <div className="stat">
               <strong>3</strong>
-              <span>UI micro-guides</span>
-            </div>
-            <div className="stat">
-              <strong>Zero</strong>
-              <span>fluff allowed</span>
+              <span>models compared</span>
             </div>
           </div>
         </div>
@@ -42,12 +42,13 @@ function HomePage() {
         <div className="hero-visual">
           <div className="hero-panel">
             <img
-              src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80"
-              alt="Design desk with colorful UI elements"
+              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
+              alt="Cybersecurity digital network visualization"
             />
             <p className="muted">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices in velit varius
-              rutrum vitae arcu.
+              Phishing attacks remain one of the most prevalent cyber threats, with over 300,000
+              new malicious URLs detected monthly. Our research aims to improve detection accuracy
+              through ensemble learning methods on the PhiUSIIL dataset.
             </p>
           </div>
         </div>
@@ -56,34 +57,37 @@ function HomePage() {
       <section>
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Highlights</p>
-            <h2>What you get inside.</h2>
+            <p className="eyebrow">Research Areas</p>
+            <h2>What we investigate.</h2>
           </div>
-          <span className="muted">Clean patterns, real-world snippets.</span>
+          <span className="muted">Algorithmic comparison for threat detection.</span>
         </div>
         <div className="feature-grid">
           <div className="feature-card">
-            <div className="feature-icon">UI</div>
-            <h3>Layout recipes</h3>
+            <div className="feature-icon">FF</div>
+            <h3>FastForest Algorithm</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac sed augue sem sit bibendum
-              at dui varius.
+              Our custom decision forest implementation optimized for phishing URL feature extraction.
+              Initial 99% accuracy revealed critical overfitting issues that required hyperparameter
+              recalibration to achieve legitimate 88% accuracy.
             </p>
           </div>
           <div className="feature-card">
-            <div className="feature-icon">FE</div>
-            <h3>React clarity</h3>
+            <div className="feature-icon">RF</div>
+            <h3>RandomForest Baseline</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies suspendisse
-              pellentesque auctor habitant amet.
+              Established scikit-learn implementation serving as our comparative baseline.
+              Achieved stable 91% accuracy with strong generalization across validation sets
+              and minimal overfitting.
             </p>
           </div>
           <div className="feature-card">
-            <div className="feature-icon">UX</div>
-            <h3>Microcopy cues</h3>
+            <div className="feature-icon">XG</div>
+            <h3>XGBoost Performance</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis nisl ultricies
-              dignissim vulputate est.
+              Gradient boosting with built-in L1/L2 regularization achieved 93% accuracy—the
+              highest among all models. Demonstrates superior feature extraction and robust
+              performance on PhiUSIIL.
             </p>
           </div>
         </div>
@@ -92,27 +96,44 @@ function HomePage() {
       <section className="articles-section">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Articles</p>
-            <h2>Latest reads.</h2>
+            <p className="eyebrow">Intel</p>
+            <h2>Latest findings.</h2>
           </div>
           <Link to="/articles" className="button-link secondary">
             View all
           </Link>
         </div>
         <div className="article-preview-grid">
-          {featuredArticles.map((article) => (
-            <div key={article.name} className="article-preview">
-              <div className="article-meta">
-                <span className="pill">React</span>
-                <span className="muted">{article.content[0].substring(0, 30)}...</span>
+          {featuredArticles.map((article) => {
+            const severityColors = {
+              Critical: '#ef4444',
+              High: '#f59e0b',
+              Info: '#22d3ee',
+            };
+
+            return (
+              <div key={article.name} className="article-preview">
+                <div className="article-meta">
+                  <span
+                    className="pill"
+                    style={{
+                      background: `${severityColors[article.severity]}20`,
+                      color: severityColors[article.severity],
+                      borderColor: `${severityColors[article.severity]}40`
+                    }}
+                  >
+                    {article.severity}
+                  </span>
+                  <span className="muted">{article.content[0].substring(0, 30)}...</span>
+                </div>
+                <h3>{article.title}</h3>
+                <p>{article.content[0].substring(0, 150)}...</p>
+                <Link to={`/articles/${article.name}`} className="button-link secondary">
+                  Read intel
+                </Link>
               </div>
-              <h3>{article.title}</h3>
-              <p>{article.content[0].substring(0, 150)}...</p>
-              <Link to={`/articles/${article.name}`} className="button-link secondary">
-                Read article
-              </Link>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>

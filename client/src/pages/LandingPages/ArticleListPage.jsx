@@ -37,11 +37,11 @@ function ArticleListPage() {
   return (
     <div className="page">
       <div className="page-header">
-        <p className="eyebrow">Library</p>
-        <h1>Articles crafted for UI-minded developers.</h1>
+        <p className="eyebrow">Intel Library</p>
+        <h1>Research Findings & Analysis</h1>
         <p className="lead">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper massa sit a, nunc volutpat
-          elit tortor.
+          In-depth analysis of FastForest, RandomForest, and XGBoost models for phishing URL
+          detection on the PhiUSIIL dataset.
         </p>
       </div>
 
@@ -54,13 +54,13 @@ function ArticleListPage() {
       )}
 
       <div className="cta-banner">
-        <h3>Looking for more?</h3>
+        <h3>Want to dive deeper?</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel purus faucibus neque sed
-          elementum feugiat.
+          Explore our complete research methodology, timeline, and findings on phishing URL
+          detection using ensemble learning methods.
         </p>
         <Link to="/about" className="button-link secondary">
-          Meet the crew
+          About the Research
         </Link>
       </div>
     </div>
