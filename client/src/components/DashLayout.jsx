@@ -159,14 +159,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const getPageTitle = (pathname) => {
   switch (pathname) {
-    // case "/dashboard":
-    //   return "Dashboard";
     case "/dashboard/dash-articles":
       return "Intel";
     case "/dashboard/users":
       return "Users";
-    // case "/dashboard/reports":
-    //   return "Reports";
     default:
       return "Welcome";
   }

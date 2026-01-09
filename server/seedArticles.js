@@ -46,23 +46,10 @@ const articles = [
 
 const seedArticles = async () => {
   try {
-    // Connect to MongoDB
     await mongoose.connect(process.env.MONGO_URI);
-    console.log('MongoDB Connected');
-
-    // Clear existing articles (optional - remove if you want to keep existing)
     await Article.deleteMany({});
-    console.log('Cleared existing articles');
-
-    // Insert articles
     const inserted = await Article.insertMany(articles);
     console.log(`${inserted.length} articles seeded successfully!`);
-
-    console.log('\nSeeded articles:');
-    inserted.forEach(article => {
-      console.log(`- ${article.title} (${article.severity})`);
-    });
-
   } catch (error) {
     console.error('Error:', error.message);
   } finally {

@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
@@ -16,25 +15,24 @@ const app = express();
 // Database Connection
 connectDB();
 
+// Middleware
 app.use(express.json());
-
-//Middleware
 app.use(jsonParser);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
+// CORS Configuration
 const corsOptions = {
-  origin: "*", // Allow all origins
-  credentials: true, // Allow credentials
+  origin: "*",
+  credentials: true,
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
   preflightContinue: false,
-  optionsSuccessStatus: 204, // For legacy browser support
+  optionsSuccessStatus: 204,
 };
-app.options("", cors(corsOptions)); // Pre-flight request for all routes
+app.options("", cors(corsOptions));
 app.use(cors(corsOptions));
 
-// Curb Cores Error by adding a header here
+// Additional CORS Headers
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -51,18 +49,6 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/articles", articleRoutes);
-
-//Getting UI
-// if (process.env.NODE_ENV === "production") {
-//     const root = path.join(__dirname, '../robles-front-end/dist');
-//     app.use(express.static(root));
-//     app.all('/{*any}', (req, res, next) => {
-//         res.sendFile(path.join(root, 'index.html'));
-//     })
-//     // app.get('*', (req, res) => {
-//         // res.sendFile(path.join(root, 'index.html'));
-//     // });
-// }
 
 // Error Handling
 app.use((err, req, res, next) => {

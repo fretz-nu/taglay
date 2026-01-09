@@ -10,21 +10,14 @@ const SignInPage = () => {
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        // navigate('/dashboard');
         e.preventDefault();
         try {
-            // Call the login API
             const { data } = await loginUser({ email, password });
-            console.log('Login successful:', data);
-
             localStorage.setItem('token', data.token);
             localStorage.setItem('firstName', data.firstName);
-            localStorage.setItem('type', data.type); // user this for dynamic rendering
-
-            // Navigate to the dashboard with the user's email and type
+            localStorage.setItem('type', data.type);
             navigate('/dashboard/dash-articles', { state: { firstName: data.firstName, type: data.type } });
         } catch (err) {
-            console.error('Login failed:', err.response?.data?.message || err.message);
             setError(err.response?.data?.message || 'Login failed. Please try again.');
         }
     };
