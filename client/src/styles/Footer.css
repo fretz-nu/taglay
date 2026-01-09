@@ -1,8 +1,27 @@
 .corporate-footer {
-  background: #0f172a;
-  color: #e2e8f0;
+  background: #000000;
+  color: #00cc00;
   padding: 54px 0 32px;
   margin-top: 72px;
+  border-top: 1px solid #00ff00;
+  position: relative;
+}
+
+.corporate-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff00, transparent);
+  animation: scan-line 2s linear infinite;
+}
+
+@keyframes scan-line {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
 }
 
 .footer-content {
@@ -14,14 +33,17 @@
 }
 
 .footer-section h4 {
-  color: #ffffff;
+  color: #00ff00;
   font-size: 1.05rem;
   margin-bottom: 10px;
   font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .footer-section p {
-  color: #cbd5e1;
+  color: #00cc00;
   line-height: 1.6;
   margin: 4px 0;
 }
@@ -32,13 +54,20 @@
 }
 
 .social-links a {
-  color: #e2e8f0;
-  transition: color 0.2s ease, transform 0.18s ease;
+  color: #00cc00;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  padding: 6px 10px;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.8rem;
 }
 
 .social-links a:hover {
-  color: #0ea5e9;
-  transform: translateY(-2px);
+  color: #00ff88;
+  border-color: #00ff00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
 }
 
 .footer-bottom {
@@ -46,7 +75,15 @@
   margin: 28px auto 0;
   text-align: center;
   padding-top: 18px;
-  border-top: 1px solid rgba(226, 232, 240, 0.18);
-  color: #94a3b8;
-  font-size: 0.95rem;
+  border-top: 1px solid #008800;
+  color: #008800;
+  font-size: 0.9rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.footer-bottom::before {
+  content: '[EOF]';
+  display: block;
+  margin-bottom: 8px;
+  opacity: 0.5;
 }

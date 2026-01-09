@@ -5,10 +5,43 @@
   align-items: center;
   gap: 28px;
   padding: 48px 28px;
+  position: relative;
   background:
-    radial-gradient(120% 90% at 20% 20%, rgba(34, 211, 238, 0.12), transparent),
-    radial-gradient(120% 90% at 80% 10%, rgba(14, 165, 233, 0.1), transparent),
-    linear-gradient(180deg, var(--bg-deep) 0%, #0b1120 100%);
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 0, 0.02) 0px,
+      rgba(0, 255, 0, 0.02) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    linear-gradient(180deg, #000000 0%, #0a0f0a 100%);
+  background-size: 100% 4px, 100% 100%;
+}
+
+.back-button {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  background: transparent;
+  color: #00cc00;
+  border: 1px solid #008800;
+  padding: 10px 16px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.18s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 10;
+}
+
+.back-button:hover {
+  color: #00ff88;
+  border-color: #00ff00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
 }
 
 .auth-hero {
@@ -22,29 +55,51 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(34, 211, 238, 0.15);
-  color: var(--accent-cyan);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  border-radius: 2px;
+  background: rgba(0, 255, 0, 0.1);
+  color: #00ff00;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   width: fit-content;
-  border: 1px solid rgba(34, 211, 238, 0.3);
+  border: 1px solid #00ff00;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
 .auth-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
+  background: rgba(0, 20, 0, 0.7);
+  border: 1px solid #00ff00;
+  border-radius: 4px;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
   padding: 24px 24px 28px;
   width: min(440px, 100%);
   justify-self: center;
+  position: relative;
+}
+
+.auth-card::before {
+  content: '[LOGIN_PROTOCOL]';
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  background: #000000;
+  padding: 0 6px;
+  color: #008800;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
 }
 
 .auth-card-header {
   display: grid;
   gap: 6px;
   margin-bottom: 16px;
+}
+
+.auth-card-header h2 {
+  color: #00ff00;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
 }
 
 .auth-form {
@@ -56,33 +111,37 @@
   display: grid;
   gap: 8px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #00ff00;
 }
 
 .auth-field span {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .auth-field input {
   width: 100%;
   padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(15, 23, 42, 0.5);
-  color: var(--text-primary);
-  font-size: 1rem;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+  border-radius: 2px;
+  border: 1px solid #008800;
+  background: rgba(0, 10, 0, 0.8);
+  color: #00ff00;
+  font-size: 0.95rem;
+  font-family: 'Share Tech Mono', monospace;
+  transition: all 0.18s ease;
 }
 
 .auth-field input:focus {
   outline: none;
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.15);
-  background: rgba(15, 23, 42, 0.8);
+  border-color: #00ff00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.05);
+  background: rgba(0, 20, 0, 0.9);
 }
 
 .auth-field input::placeholder {
-  color: var(--text-muted);
+  color: #008800;
 }
 
 .auth-submit {
@@ -93,8 +152,9 @@
 .auth-footnote {
   margin-top: 12px;
   text-align: center;
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: #00cc00;
+  font-family: 'Share Tech Mono', monospace;
 }
 
 @media (max-width: 640px) {
@@ -104,5 +164,12 @@
 
   .auth-card {
     padding: 20px 18px 24px;
+  }
+
+  .back-button {
+    top: 18px;
+    left: 18px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
   }
 }

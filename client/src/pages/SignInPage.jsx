@@ -31,8 +31,11 @@ const SignInPage = () => {
 
     return (
         <div className="auth-shell">
+            <button className="back-button" onClick={() => navigate(-1)}>
+                &lt; BACK
+            </button>
             <div className="auth-hero">
-                <div className="auth-hero-badge">Taglay</div>
+                <div className="auth-hero-badge">Innovative Minds</div>
                 <h1>Welcome back</h1>
                 <p className="muted">Sign in to manage users and articles.</p>
             </div>
