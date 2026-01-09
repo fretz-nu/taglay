@@ -42,6 +42,10 @@ function DashArticleListPage() {
     isActive: true,
   });
 
+  // Get user type from localStorage
+  const userType = localStorage.getItem('type');
+  const canEdit = userType === 'admin' || userType === 'editor';
+
   const loadArticles = async () => {
     try {
       setLoading(true);
@@ -138,43 +142,54 @@ function DashArticleListPage() {
         );
       },
     },
-    {
-      field: 'isActive',
-      headerName: 'Active',
-      flex: 0.75,
-      renderCell: (params) => (
-        <Switch
-          checked={params.row.isActive}
-          onChange={() => handleToggleActive(params.row._id)}
-        />
-      ),
-    },
-    {
-      field: 'actions',
-      headerName: 'Actions',
-      flex: 1,
-      renderCell: (params) => (
-        <Stack direction="row" spacing={1}>
-          <Button variant="contained" size="small" onClick={() => handleEdit(params.row._id)}>
-            Edit
-          </Button>
-        </Stack>
-      ),
-    },
+    ...(canEdit ? [
+      {
+        field: 'isActive',
+        headerName: 'Active',
+        flex: 0.75,
+        renderCell: (params) => (
+          <Switch
+            checked={params.row.isActive}
+            onChange={() => handleToggleActive(params.row._id)}
+          />
+        ),
+      },
+      {
+        field: 'actions',
+        headerName: 'Actions',
+        flex: 1,
+        renderCell: (params) => (
+          <Stack direction="row" spacing={1}>
+            <Button variant="contained" size="small" onClick={() => handleEdit(params.row._id)}>
+              Edit
+            </Button>
+          </Stack>
+        ),
+      },
+    ] : []),
   ];
 
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
-        <Typography variant="h2" fontWeight='bold'>Intel</Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddCircleIcon />}
-          onClick={handleOpen}
-        >
-          Add Intel
-        </Button>
+        <Stack>
+          <Typography variant="h2" fontWeight='bold'>Intel</Typography>
+          {!canEdit && (
+            <Typography variant="caption" color="text.secondary">
+              View-only mode
+            </Typography>
+          )}
+        </Stack>
+        {canEdit && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddCircleIcon />}
+            onClick={handleOpen}
+          >
+            Add Intel
+          </Button>
+        )}
       </Stack>
 
       <DataGrid
@@ -187,7 +202,8 @@ function DashArticleListPage() {
         disableSelectionOnClick
       />
 
-      <Modal open={open} onClose={handleClose}>
+      {canEdit && (
+        <Modal open={open} onClose={handleClose}>
         <Box sx={modalStyle}>
           <Typography variant="h6">{isEditing ? 'Edit Intel' : 'Add Intel'}</Typography>
           <Stack spacing={2} sx={{ mt: 2 }}>
@@ -233,6 +249,7 @@ function DashArticleListPage() {
           </Stack>
         </Box>
       </Modal>
+      )}
     </>
   );
 }
