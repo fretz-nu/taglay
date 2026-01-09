@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import articles from '../../article-content';
+import { fetchArticles } from '../../services/ArticleService';
 
 function HomePage() {
-  const featuredArticles = articles.slice(0, 3);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadArticles = async () => {
+      try {
+        const { data } = await fetchArticles();
+        // Filter only active articles and take first 3 for homepage
+        const activeArticles = (data?.articles || [])
+          .filter(article => article.isActive)
+          .slice(0, 3);
+        setArticles(activeArticles);
+      } catch (err) {
+        setError('Unable to load articles right now.');
+        console.error('Error fetching articles:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadArticles();
+  }, []);
 
   return (
     <div className="page">
@@ -104,36 +126,46 @@ function HomePage() {
           </Link>
         </div>
         <div className="article-preview-grid">
-          {featuredArticles.map((article) => {
-            const severityColors = {
-              Critical: '#ef4444',
-              High: '#f59e0b',
-              Info: '#22d3ee',
-            };
+          {loading ? (
+            <p className="muted">Loading articles...</p>
+          ) : error ? (
+            <p className="muted">{error}</p>
+          ) : articles.length === 0 ? (
+            <p className="muted">No articles available.</p>
+          ) : (
+            articles.map((article) => {
+              const severityColors = {
+                Critical: '#ef4444',
+                High: '#f59e0b',
+                Info: '#22d3ee',
+              };
 
-            return (
-              <div key={article.name} className="article-preview">
-                <div className="article-meta">
-                  <span
-                    className="pill"
-                    style={{
-                      background: `${severityColors[article.severity]}20`,
-                      color: severityColors[article.severity],
-                      borderColor: `${severityColors[article.severity]}40`
-                    }}
-                  >
-                    {article.severity}
-                  </span>
-                  <span className="muted">{article.content[0].substring(0, 30)}...</span>
+              return (
+                <div key={article._id} className="article-preview">
+                  <div className="article-meta">
+                    <span
+                      className="pill"
+                      style={{
+                        background: `${severityColors[article.severity]}20`,
+                        color: severityColors[article.severity],
+                        borderColor: `${severityColors[article.severity]}40`
+                      }}
+                    >
+                      {article.severity}
+                    </span>
+                    <span className="muted">
+                      {article.content?.[0]?.substring(0, 30) || ''}...
+                    </span>
+                  </div>
+                  <h3>{article.title}</h3>
+                  <p>{article.content?.[0]?.substring(0, 150) || ''}...</p>
+                  <Link to={`/articles/${article.name}`} className="button-link secondary">
+                    Read intel
+                  </Link>
                 </div>
-                <h3>{article.title}</h3>
-                <p>{article.content[0].substring(0, 150)}...</p>
-                <Link to={`/articles/${article.name}`} className="button-link secondary">
-                  Read intel
-                </Link>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </section>
     </div>

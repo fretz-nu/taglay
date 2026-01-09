@@ -21,15 +21,18 @@ nav {
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
-.logo img {
-  width: 34px;
-  height: 34px;
+.logo-text {
+  font-family: 'Courier New', Courier, monospace;
+  color: #22d3ee;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 nav ul {
