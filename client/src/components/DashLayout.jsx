@@ -27,6 +27,10 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import ArticleIcon from "@mui/icons-material/Article";
 import logo from "../assets/react.svg";
 import { Stack } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import hackerTheme from "../theme/hackerTheme";
+import "../styles/AdminPanel.css";
+import { AdminSearchProvider, useAdminSearch } from "../context/AdminSearchContext.jsx";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -66,6 +70,10 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  backgroundColor: "rgba(0, 0, 0, 0.95)",
+  backdropFilter: "blur(4px)",
+  borderBottom: "1px solid #00ff00",
+  boxShadow: "0 0 20px rgba(0, 255, 0, 0.2), inset 0 0 20px rgba(0, 255, 0, 0.05)",
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -85,11 +93,23 @@ const Drawer = styled(MuiDrawer, {
   boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
+    "& .MuiDrawer-paper": {
+      ...openedMixin(theme),
+      backgroundColor: "#0a0f0a",
+      borderRight: "1px solid #00ff00",
+      backgroundImage: "repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.03) 0px, rgba(0, 255, 0, 0.03) 1px, transparent 1px, transparent 2px)",
+      backgroundSize: "100% 4px",
+    },
   }),
   ...(!open && {
     ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
+    "& .MuiDrawer-paper": {
+      ...closedMixin(theme),
+      backgroundColor: "#0a0f0a",
+      borderRight: "1px solid #00ff00",
+      backgroundImage: "repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.03) 0px, rgba(0, 255, 0, 0.03) 1px, transparent 1px, transparent 2px)",
+      backgroundSize: "100% 4px",
+    },
   }),
 }));
 
@@ -101,14 +121,18 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "#00cc00",
 }));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  borderRadius: "4px",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  border: "1px solid #008800",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: "rgba(0, 255, 0, 0.05)",
+    borderColor: "#00ff00",
+    boxShadow: "0 0 15px rgba(0, 255, 0, 0.3)",
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -119,13 +143,14 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  color: "#00ff00",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    fontFamily: '"Space Mono", monospace',
+    color: "#00ff00",
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
@@ -147,6 +172,75 @@ const getPageTitle = (pathname) => {
   }
 };
 
+// AppBar Content Component with Search
+const AppBarContent = ({ open, handleDrawerToggle, name, handleLogout }) => {
+  const { searchQuery, setSearchQuery } = useAdminSearch();
+
+  return (
+    <Toolbar>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={handleDrawerToggle}
+        edge="start"
+        sx={{ marginRight: 5, ...open }}
+      >
+        {open ? <MenuOpenIcon /> : <MenuIcon />}
+      </IconButton>
+      <Typography
+        variant="h6"
+        noWrap
+        component="div"
+        sx={{
+          flexGrow: 1,
+          fontFamily: '"Share Tech Mono", monospace',
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          color: "#00ff00",
+          textShadow: "0 0 10px rgba(0, 255, 0, 0.5)"
+        }}
+      >
+        Welcome, {name}
+      </Typography>
+      {/* Search */}
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search…"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          inputProps={{ "aria-label": "search" }}
+        />
+      </Search>
+      <Button
+        variant="outlined"
+        onClick={handleLogout}
+        sx={{
+          fontFamily: '"Share Tech Mono", monospace',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          fontWeight: 600,
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderRadius: '2px',
+          transition: 'all 0.18s ease',
+          borderColor: '#00cc00',
+          color: '#00cc00',
+          '&:hover': {
+            backgroundColor: 'rgba(0, 255, 0, 0.1)',
+            borderColor: '#00ff00',
+            color: '#00ff88',
+          },
+        }}
+      >
+        Logout
+      </Button>
+    </Toolbar>
+  );
+};
+
 const DashLayout = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -165,53 +259,28 @@ const DashLayout = () => {
     setOpen(false);
   };
 
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+
   const handleLogout = () => {
     navigate("/");
   };
 
   return (
-    <>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        {/* App Bar */}
-        {/* <AppBar position="fixed" open={open}> */}
-        <AppBar position="fixed">
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              // onClick={(open)}
-              onClick={open ? handleDrawerClose : handleDrawerOpen}
-              edge="start"
-              // sx={{ marginRight: 5, ...(open && { display: 'none' }) }}
-              sx={{ marginRight: 5, ...open }}
-            >
-              {open ? <MenuOpenIcon /> : <MenuIcon />}
-            </IconButton>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1 }}
-            >
-              {/* {pageTitle} */}
-              Welcome, {name}
-            </Typography>
-            {/* Search */}
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            <Button color="inherit" variant="outlined" onClick={handleLogout}>
-              Logout
-            </Button>
-          </Toolbar>
-        </AppBar>
+    <ThemeProvider theme={hackerTheme}>
+      <AdminSearchProvider>
+        <Box className="admin-panel-container" sx={{ display: "flex", minHeight: "100vh" }}>
+          <CssBaseline />
+          {/* App Bar */}
+          <AppBar position="fixed">
+            <AppBarContent
+              open={open}
+              handleDrawerToggle={handleDrawerToggle}
+              name={name}
+              handleLogout={handleLogout}
+            />
+          </AppBar>
         {/* Drawer */}
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
@@ -231,11 +300,39 @@ const DashLayout = () => {
                 component={Link}
                 to="/dashboard/dash-articles"
                 selected={location.pathname === "/dashboard/dash-articles"}
+                sx={{
+                  borderRadius: "4px",
+                  margin: "4px 8px",
+                  "&:hover": {
+                    backgroundColor: "rgba(0, 255, 0, 0.1)",
+                  },
+                  "&.Mui-selected": {
+                    backgroundColor: "rgba(0, 255, 0, 0.15)",
+                    border: "1px solid #00ff00",
+                    "&:hover": {
+                      backgroundColor: "rgba(0, 255, 0, 0.2)",
+                    },
+                  },
+                }}
               >
-                <ListItemIcon>
+                <ListItemIcon
+                  sx={{
+                    color: "#00ff00",
+                  }}
+                >
                   <ArticleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Intel" />
+                <ListItemText
+                  primary="Intel"
+                  sx={{
+                    "& .MuiTypography-root": {
+                      fontFamily: '"Share Tech Mono", monospace',
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      color: "#00ff00",
+                    },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
             {/* <>
@@ -259,24 +356,53 @@ const DashLayout = () => {
                     component={Link}
                     to="/dashboard/users"
                     selected={location.pathname === "/dashboard/users"}
+                    sx={{
+                      borderRadius: "4px",
+                      margin: "4px 8px",
+                      "&:hover": {
+                        backgroundColor: "rgba(0, 255, 0, 0.1)",
+                      },
+                      "&.Mui-selected": {
+                        backgroundColor: "rgba(0, 255, 0, 0.15)",
+                        border: "1px solid #00ff00",
+                        "&:hover": {
+                          backgroundColor: "rgba(0, 255, 0, 0.2)",
+                        },
+                      },
+                    }}
                   >
-                    <ListItemIcon>
+                    <ListItemIcon
+                      sx={{
+                        color: "#00ff00",
+                      }}
+                    >
                       <PeopleIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Users" />
+                    <ListItemText
+                      primary="Users"
+                      sx={{
+                        "& .MuiTypography-root": {
+                          fontFamily: '"Share Tech Mono", monospace',
+                          textTransform: "uppercase",
+                          letterSpacing: "0.1em",
+                          color: "#00ff00",
+                        },
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
               </>
             )}
           </List>
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Box component="main" className="admin-main-content" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           {/* Content */}
           <Outlet />
         </Box>
       </Box>
-    </>
+      </AdminSearchProvider>
+    </ThemeProvider>
   );
 };
 

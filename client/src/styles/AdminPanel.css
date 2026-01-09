@@ -1,0 +1,602 @@
+/* ============================================
+   ADMIN PANEL - HACKER TERMINAL THEME
+   ============================================ */
+
+/* Admin Panel Container with Scanline Effect */
+.admin-panel-container {
+  min-height: 100vh;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 0, 0.03) 0px,
+      rgba(0, 255, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    linear-gradient(180deg, #000000 0%, #0a0f0a 100%);
+  background-size: 100% 100%, 100% 4px;
+  color: #00ff00;
+  font-family: 'Space Mono', 'Share Tech Mono', 'Courier New', monospace;
+  line-height: 1.6;
+  text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
+}
+
+/* Scanline Overlay Effect */
+.admin-panel-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* Main Content Area */
+.admin-main-content {
+  background: transparent;
+  color: #00ff00;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   DATA GRID CUSTOM STYLING
+   ============================================ */
+
+/* Override Mui DataGrid styles */
+.admin-panel-container .MuiDataGrid-root {
+  border: 1px solid #00ff00;
+  background: #0d1a0d;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+  font-family: 'Space Mono', monospace;
+}
+
+.admin-panel-container .MuiDataGrid-columnHeader {
+  background: #0a1a0a;
+  border-bottom: 2px solid #00ff00;
+  color: #00ff00;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.admin-panel-container .MuiDataGrid-columnHeaderTitle {
+  color: #00ff00;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.admin-panel-container .MuiDataGrid-cell {
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  color: #00cc00;
+  font-family: 'Space Mono', monospace;
+}
+
+.admin-panel-container .MuiDataGrid-row {
+  transition: all 0.18s ease;
+}
+
+.admin-panel-container .MuiDataGrid-row:hover {
+  background: rgba(0, 255, 0, 0.08);
+}
+
+.admin-panel-container .MuiDataGrid-row.Mui-selected {
+  background: rgba(0, 255, 0, 0.12);
+}
+
+.admin-panel-container .MuiDataGrid-footerContainer {
+  border-top: 1px solid #008800;
+  background: #0a1a0a;
+  color: #00cc00;
+}
+
+.admin-panel-container .MuiTablePagination-root {
+  color: #00cc00;
+}
+
+.admin-panel-container .MuiTablePagination-selectLabel,
+.admin-panel-container .MuiTablePagination-displayedRows {
+  color: #00cc00;
+  font-family: 'Space Mono', monospace;
+}
+
+.admin-panel-container .MuiTablePagination-actions button {
+  color: #00ff00;
+}
+
+.admin-panel-container .MuiTablePagination-actions button:hover {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.admin-panel-container .MuiTablePagination-selectIcon {
+  color: #00ff00;
+}
+
+/* Sort icon */
+.admin-panel-container .MuiDataGrid-sortIcon {
+  color: #00ff00;
+}
+
+.admin-panel-container .MuiDataGrid-menuIcon {
+  color: #00ff00;
+}
+
+/* Filter panel */
+.admin-panel-container .MuiDataGrid-panel {
+  background: #0d1a0d;
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+}
+
+.admin-panel-container .MuiFilterForm-root {
+  color: #00ff00;
+}
+
+/* Checkbox in DataGrid */
+.admin-panel-container .MuiCheckbox-root {
+  color: #00cc00;
+}
+
+.admin-panel-container .MuiCheckbox-root.Mui-checked {
+  color: #00ff00;
+}
+
+/* ============================================
+   PAGE HEADING STYLES
+   ============================================ */
+
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #00ff00;
+  position: relative;
+}
+
+.admin-page-header::before {
+  content: '> ';
+  color: #008800;
+  font-family: 'Share Tech Mono', monospace;
+  position: absolute;
+  left: -16px;
+}
+
+.admin-page-title {
+  color: #00ff00;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  margin: 0;
+}
+
+.admin-page-subtitle {
+  color: #00cc00;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* ============================================
+   SEVERITY BADGES / PILLS
+   ============================================ */
+
+.admin-severity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: 1px solid;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.admin-severity-badge.critical {
+  background: rgba(255, 0, 64, 0.15);
+  color: #ff0040;
+  border-color: #ff0040;
+}
+
+.admin-severity-badge.high {
+  background: rgba(255, 170, 0, 0.15);
+  color: #ffaa00;
+  border-color: #ffaa00;
+}
+
+.admin-severity-badge.info {
+  background: rgba(0, 255, 0, 0.1);
+  color: #00ff00;
+  border-color: #00ff00;
+}
+
+/* ============================================
+   BUTTON PREFIX > SYMBOL
+   ============================================ */
+
+.admin-terminal-button {
+  position: relative;
+}
+
+.admin-terminal-button::before {
+  content: '>';
+  margin-right: 4px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* ============================================
+   SEARCH BAR CUSTOM STYLES
+   ============================================ */
+
+.admin-search-bar {
+  position: relative;
+  border: 1px solid #008800;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.admin-search-bar:hover,
+.admin-search-bar:focus-within {
+  border-color: #00ff00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.admin-search-input {
+  color: #00ff00;
+  font-family: 'Space Mono', monospace;
+  padding: 8px 12px;
+}
+
+.admin-search-input::placeholder {
+  color: #008800;
+}
+
+.admin-search-icon {
+  color: #00cc00;
+}
+
+/* ============================================
+   MODAL ENHANCEMENTS
+   ============================================ */
+
+.admin-modal-box {
+  background: #0d1a0d;
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanline effect on modal */
+.admin-modal-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0, 255, 0, 0.03) 1px,
+    rgba(0, 255, 0, 0.03) 2px
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+.admin-modal-title {
+  color: #00ff00;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+/* ============================================
+   FORM INPUTS ENHANCEMENT
+   ============================================ */
+
+.admin-form-label {
+  color: #00cc00;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+
+.admin-form-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #008800;
+  border-radius: 4px;
+  color: #00ff00;
+  font-family: 'Space Mono', monospace;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+}
+
+.admin-form-input:focus {
+  outline: none;
+  border-color: #00ff00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.admin-form-input::placeholder {
+  color: #008800;
+}
+
+/* ============================================
+   SIDEBAR NAVIGATION ENHANCEMENTS
+   ============================================ */
+
+.admin-sidebar {
+  background: #0a0f0a;
+  border-right: 1px solid #00ff00;
+  position: relative;
+}
+
+/* Terminal prompt in sidebar */
+.admin-sidebar::before {
+  content: '[admin@terminal:~]$';
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: #008800;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
+  opacity: 0.6;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.admin-nav-item {
+  position: relative;
+  color: #00cc00;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.18s ease;
+}
+
+.admin-nav-item::before {
+  content: '>';
+  margin-right: 8px;
+  color: #008800;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.admin-nav-item:hover {
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+.admin-nav-item.active {
+  color: #00ff00;
+  border-left: 3px solid #00ff00;
+  padding-left: 12px;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+/* ============================================
+   TOOLTIP STYLES
+   ============================================ */
+
+.admin-tooltip {
+  background: #0d1a0d;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+/* ============================================
+   STATUS INDICATORS
+   ============================================ */
+
+.admin-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-status-indicator::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 10px currentColor;
+  }
+}
+
+.admin-status-indicator.active {
+  color: #00ff00;
+}
+
+.admin-status-indicator.inactive {
+  color: #ff0040;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+.admin-loading-text {
+  color: #00cc00;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.5; }
+}
+
+/* ============================================
+   ACTION BUTTONS IN TABLE
+   ============================================ */
+
+.admin-action-button {
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  background: transparent;
+  padding: 4px 12px;
+  border-radius: 2px;
+  transition: all 0.18s ease;
+}
+
+.admin-action-button:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   DIVIDER WITH TERMINAL STYLE
+   ============================================ */
+
+.admin-terminal-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff00, transparent);
+  margin: 20px 0;
+  opacity: 0.5;
+}
+
+.admin-terminal-divider::before {
+  content: '────────────────────────────────────────────────────────────────';
+  display: block;
+  text-align: center;
+  color: #008800;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .admin-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .admin-page-header::before {
+    position: static;
+    margin-bottom: 4px;
+  }
+
+  .admin-sidebar::before {
+    display: none;
+  }
+}
+
+/* ============================================
+   SCROLLBAR CUSTOMIZATION
+   ============================================ */
+
+.admin-panel-container::-webkit-scrollbar,
+.admin-panel-container *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.admin-panel-container::-webkit-scrollbar-track,
+.admin-panel-container *::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+.admin-panel-container::-webkit-scrollbar-thumb,
+.admin-panel-container *::-webkit-scrollbar-thumb {
+  background: #008800;
+  border-radius: 4px;
+}
+
+.admin-panel-container::-webkit-scrollbar-thumb:hover,
+.admin-panel-container *::-webkit-scrollbar-thumb:hover {
+  background: #00ff00;
+}
+
+/* ============================================
+   TERMINAL CURSOR EFFECT
+   ============================================ */
+
+.admin-terminal-cursor::after {
+  content: '█';
+  animation: cursor-blink 1s infinite;
+  color: #00ff00;
+  margin-left: 4px;
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ============================================
+   GLITCH EFFECT FOR HEADINGS
+   ============================================ */
+
+.admin-glitch-text {
+  position: relative;
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.5);
+  }
+  91%, 93% {
+    text-shadow: -2px 0 #ff0040, 2px 0 #00ff88;
+  }
+  92%, 94% {
+    text-shadow: 2px 0 #ff0040, -2px 0 #00ff88;
+  }
+}
